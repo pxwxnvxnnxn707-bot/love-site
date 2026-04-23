@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Boo Boo 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', cursive;
+    background: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* overlay */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 182, 193, 0.25);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+}
+
+/* intro */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    font-family: cursive;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* main */
+#main {
+    display: none;
+    text-align: center;
+    margin-top: 120px;
+    color: #5a2a2a;
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #ff6b81;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* letter */
+#letter {
+    display: none;
+    margin: 40px auto;
+    width: 70%;
+    background: rgba(255, 245, 240, 0.96);
+    padding: 30px;
+    border-radius: 20px;
+    font-size: 18px;
+    box-shadow: 0 0 35px rgba(255,105,135,0.5);
+    color: #5a2a2a;
+}
+
+/* typing cursor */
+#text::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    50% {opacity: 0;}
+}
+
+/* floating photos */
+.photo {
+    position: absolute;
+    width: 180px;
+    border-radius: 20px;
+    animation: floatUp 22s linear infinite;
+    opacity: 0.95;
+    box-shadow: 0 0 25px rgba(255, 182, 193, 0.8);
+}
+
+/* floating love text */
+.love {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    font-family: "Brush Script MT", cursive;
+    animation: floatUp 12s linear infinite;
+    opacity: 0.85;
+    text-shadow: 0 0 12px rgba(255,255,255,0.8);
+}
+
+@keyframes floatUp {
+    0% {transform: translateY(100vh); opacity: 0;}
+    50% {opacity: 1;}
+    100% {transform: translateY(-10vh); opacity: 0;}
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="intro" onclick="start()">
+    hey boo boo... 💖<br><small>(click me)</small>
+</div>
+
+<div id="main">
+    <h1>for my nehal 💕</h1>
+    <p>10 months… and still falling for you</p>
+    <button onclick="openLetter()">open my heart 💌</button>
+</div>
+
+<div id="letter">
+    <h2>my boo boo 💖</h2>
+    <p id="text"></p>
+</div>
+
+<audio id="music" loop>
+    <source src="perfect.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* intro */
+function start() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "block";
+}
+
+/* open letter */
+function openLetter() {
+    document.getElementById("letter").style.display = "block";
+    document.getElementById("music").play();
+    typeWriter();
+}
+
+/* message */
+let message = `Hie baby 💖
+
+HAPPY BIRTHDAY MY LOVEEE 💕
+
+today is your birthday and im happy i get to be with you on this special day.
+
+and with us being together for 10months, we entered double digits 🥺
+and it's your BIRTHDAY!!!!
+
+I cant express how happy i am to have such a lovely girlfriend as you with me.
+you are my all 💖
+
+and you have been going thru sooo much...
+and im really proud of you for being strong and getting thru it all.
+
+and im here with you by your side thru all of it 💕
+
+i love you soo much nehal.
+you are my everything.
+
+words can not describe how much you mean to me.
+
+you are such a lovely person and im so grateful to have you.
+
+i hope we will be together thru the hardships and everything else we go thru.
+
+with you by my side,
+i feel i can achieve anything in this world 🥺
+
+i know you tell me not to expend money on you...
+but i love to do it cause its one of my ways to express my love to you.
+
+but my love cannot be expressed with money.
+
+my love for you is something that no amount of money can afford 💖
+
+i love you forever my boo boo 💕`;
+
+let i = 0;
+
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+
+/* photos */
+const photos = ["memory1.jpg","memory2.jpg","memory3.jpg","memory4.jpg"];
+
+function createPhoto() {
+    const img = document.createElement("img");
+    img.src = photos[Math.floor(Math.random()*photos.length)];
+    img.className = "photo";
+    img.style.left = Math.random()*100 + "vw";
+    img.style.width = (Math.random() * 80 + 160) + "px";
+
+    document.body.appendChild(img);
+
+    setTimeout(() => img.remove(), 22000);
+}
+setInterval(createPhoto, 2500);
+
+/* floating text */
+function createLove() {
+    const text = document.createElement("div");
+    text.className = "love";
+    text.innerText = "I love you 💕";
+    text.style.left = Math.random()*100 + "vw";
+
+    document.body.appendChild(text);
+
+    setTimeout(() => text.remove(), 12000);
+}
+setInterval(createLove, 1400);
+
+</script>
+
+</body>
+</html>
